@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.lang.Nullable;
+
 import lombok.Data;
 
 @Data
@@ -31,9 +35,12 @@ public class Course {
 	
 	private Boolean active;
 
-	@Column(name = "create_at")
+	@CreationTimestamp
+	@Column(name = "create_at", updatable = false)
 	private LocalDateTime createAt;
-
+	
+	@Nullable
+	@UpdateTimestamp
 	@Column(name = "update_at")
 	private LocalDateTime updateAt;
 }

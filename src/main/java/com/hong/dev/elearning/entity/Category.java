@@ -1,7 +1,5 @@
 package com.hong.dev.elearning.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,11 +19,16 @@ public class Category {
 	@Column(name = "category_name")
 	private String name;
 	
-	private Boolean active;
+	private Boolean active = true;
 	
-	@Column(name = "create_at")
+	/*
+	@CreationTimestamp
+	@Column(name = "create_at", updatable = false)
 	private LocalDateTime createAt;
 	
+	@Nullable
+	@UpdateTimestamp
 	@Column(name = "update_at")
 	private LocalDateTime updateAt;
+	*/
 }
