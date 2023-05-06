@@ -45,6 +45,10 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.4.Final</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

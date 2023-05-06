@@ -1,10 +1,16 @@
 package com.hong.dev.elearning.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.lang.Nullable;
 
 import lombok.Data;
 
@@ -21,7 +27,6 @@ public class Category {
 	
 	private Boolean active = true;
 	
-	/*
 	@CreationTimestamp
 	@Column(name = "create_at", updatable = false)
 	private LocalDateTime createAt;
@@ -30,5 +35,5 @@ public class Category {
 	@UpdateTimestamp
 	@Column(name = "update_at")
 	private LocalDateTime updateAt;
-	*/
+
 }
