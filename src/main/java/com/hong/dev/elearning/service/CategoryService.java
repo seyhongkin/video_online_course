@@ -1,6 +1,9 @@
 package com.hong.dev.elearning.service;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
 
 import com.hong.dev.elearning.entity.Category;
 
@@ -9,5 +12,6 @@ public interface CategoryService {
 	Category getById(Long categoryId);
 	List<Category> getByName(String name);
 	Category update(Long categoryId, Category categoryUpdate);
-	List<Category> getActive(Long categoryId);
+	Page<Category> getCategories(Map<String, String> param);
+	void remove(Long categoryId);
 }
