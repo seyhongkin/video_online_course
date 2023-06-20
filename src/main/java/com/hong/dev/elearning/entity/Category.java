@@ -25,7 +25,7 @@ public class Category {
 	@Column(name = "category_name")
 	private String name;
 	
-	private Boolean active = true;
+	private Boolean active;
 	
 	@CreationTimestamp
 	@Column(name = "create_at", updatable = false)

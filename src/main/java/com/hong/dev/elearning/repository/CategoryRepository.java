@@ -10,8 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.hong.dev.elearning.entity.Category;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSpecificationExecutor<Category>{
-	List<Category> findByNameContainingIgnoreCaseAndActive(String name, Boolean active);
-	Optional<Category> findByActiveAndId(Boolean active,Long id);
-	List<Category> findAllByActive(Boolean active);
+public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
+	List<Category> findByNameContainingIgnoreCase(String name);
+
+	//@TEST THIS REPO
+	Optional<Category> findByActiveAndId(Boolean active, Long id);
 }

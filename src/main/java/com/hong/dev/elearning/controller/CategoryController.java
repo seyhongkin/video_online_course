@@ -32,6 +32,7 @@ public class CategoryController {
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody CategoryDTO categoryDTO){
 		Category category = categoryMapper.toCategory(categoryDTO);
+		category.setActive(true);
 		category = categoryService.create(category);
 		return ResponseEntity.ok(categoryMapper.toCategoryDTO(category));
 	}
@@ -51,19 +52,17 @@ public class CategoryController {
 		return ResponseEntity.ok(pageDTO);
 	}
 	
-	/*
-	@GetMapping
-	public ResponseEntity<?> getByName(@RequestParam("search") String name){
-		List<Category> categories = categoryService.getByName(name);
-		return ResponseEntity.ok(categories);
-	}
-	*/
-	
 	@PutMapping("{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long categoryId, @RequestBody CategoryDTO categoryDTO){
 		Category category = categoryMapper.toCategory(categoryDTO);
 		category = categoryService.update(categoryId, category);
 		return ResponseEntity.ok(categoryMapper.toCategoryDTO(category));
+	}
+	
+	@PutMapping("/active/{id}")
+	public ResponseEntity<?> toggleActive(@PathVariable("id") Long categoryId){
+		categoryService.toggleActive(categoryId);
+		return ResponseEntity.ok().build();
 	}
 	
 	@DeleteMapping("{id}")

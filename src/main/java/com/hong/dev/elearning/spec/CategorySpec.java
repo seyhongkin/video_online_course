@@ -31,6 +31,10 @@ public class CategorySpec implements Specification<Category>{
 			Predicate predicateName = cb.like(cb.lower(categoryRoot.get("name")), "%" + categoryFilter.getName().toLowerCase() + "%");
 			predicates.add(predicateName);
 		}
+		if(categoryFilter.getActive() != null) {
+			Predicate predicateActive = cb.equal(categoryRoot.get("active"), categoryFilter.getActive());
+			predicates.add(predicateActive);
+		}
 		return cb.and(predicates.toArray(Predicate[]::new));
 	}
 

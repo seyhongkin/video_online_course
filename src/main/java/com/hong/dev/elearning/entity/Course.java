@@ -33,7 +33,7 @@ public class Course {
 	@Column(name = "course_name")
 	private String name;
 	
-	private Boolean active;
+	//private Boolean active;
 
 	@CreationTimestamp
 	@Column(name = "create_at", updatable = false)

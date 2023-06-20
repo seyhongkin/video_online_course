@@ -1,6 +1,5 @@
 package com.hong.dev.elearning.service.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -34,11 +33,6 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> getByName(String name) {
-		return categoryRepository.findByNameContainingIgnoreCaseAndActive(name, true);
-	}
-
-	@Override
 	public Category update(Long categoryId, Category categoryUpdate) {
 		Category category = getById(categoryId);
 		category.setName(categoryUpdate.getName());
@@ -63,6 +57,15 @@ public class CategoryServiceImpl implements CategoryService {
 			String id = param.get("id");
 			categoryFilter.setId(Long.parseLong(id));
 		}
+		if(param.containsKey("active")) {
+			Boolean isActive = Boolean.parseBoolean(param.get("active"));
+			if(isActive == true) {
+				categoryFilter.setActive(true);
+			}else {
+				categoryFilter.setActive(false);
+			}
+			
+		}
 
 		int pageNum = PageUtil.DEFAULT_PAGE_NUMBER;
 		int pageSize = PageUtil.DEFAULT_PAGE_LIMIT;
@@ -76,15 +79,19 @@ public class CategoryServiceImpl implements CategoryService {
 
 		CategorySpec categorySpec = new CategorySpec(categoryFilter);
 		Pageable pageable = PageUtil.getPageable(pageNum, pageSize);
-		
+
 		Page<Category> page = categoryRepository.findAll(categorySpec, pageable);
 		return page;
 	}
 
-	/*
-	 * //@TODO create pagination
-	 * 
-	 * @Override public List<Category> getCategories() { return
-	 * categoryRepository.findAllByActive(true); }
-	 */
+	@Override
+	public void toggleActive(Long categoryId) {
+		Category category = categoryRepository.findById(categoryId)
+			.orElseThrow(() -> new ResourceNotFoundException("category", categoryId));
+		
+		boolean isActive = category.getActive() ? false : true;
+		category.setActive(isActive);	
+		System.out.println("save!");
+		categoryRepository.save(category);
+	}
 }
